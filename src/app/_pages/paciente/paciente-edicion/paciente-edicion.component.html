@@ -1,0 +1,78 @@
+
+<mat-card class="car-box" >
+<mat-card-title>{{title}}</mat-card-title>
+<form class="example-container" [formGroup]="form" #frmPaciente="ngForm" (ngSubmit)="operar()">
+    <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+        <div class="container" fxLayout="row" fxLayout.xs="column"  style=" justify-content:center">
+
+
+            <div [hidden]="true">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="ID" required formControlName="id">
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="column" style="padding: 1em;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombres" minlength="3" required formControlName="nombres">
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="column" style="padding: 1em;">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Apellidos" required formControlName="apellidos">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="example-full-width" style="padding: 1em;">
+                <input matInput placeholder="DNI" required formControlName="dni" type="number">
+            </mat-form-field>
+        </div>
+
+        <div class="container" fxLayout="row" fxLayout.xs="column" style=" justify-content:center">
+            <mat-form-field class="example-full-width" style="padding: 1em;">
+                <input matInput placeholder="Teléfono" required formControlName="telefono" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" style="padding: 1em;">
+                <input matInput placeholder="Direccion" required formControlName="direccion">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" style="padding: 1em;">
+                <input matInput placeholder="Email" required type="email" formControlName="email">
+            </mat-form-field>
+        </div>
+
+
+        <div style="text-align: center;">
+            <button class="btnPrimary" mat-raised-button color="primary" type="submit" [disabled]="frmPaciente.invalid">
+                <mat-icon>done</mat-icon>
+                <span>Aceptar</span>
+            </button>
+            <button class="btnWarn" mat-raised-button color="accent" routerLink='/pages/paciente' type="button">
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+    </div>
+</form>
+</mat-card>
+
+<!--<div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field>
+    </div>
+  </div>-->

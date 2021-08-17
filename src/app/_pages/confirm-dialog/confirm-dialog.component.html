@@ -1,0 +1,10 @@
+
+<div mat-dialog-content>
+  <img src="assets/question.svg" width="128" style="display: block;margin: auto;">
+  <p class="text">¿Esta seguro de eliminar?</p>
+ 
+</div>
+<div mat-dialog-actions class="centerBtn">
+  <button class="btnWarn"  mat-button  (click)="cerrarDialog()">Cancelar</button>
+  <button class="btnPrimary"  mat-button [mat-dialog-close]="true">Confirmar</button>
+</div>
