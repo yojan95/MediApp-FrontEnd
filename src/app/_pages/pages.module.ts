@@ -30,6 +30,8 @@ import { NuevoComponent } from './login/nuevo/nuevo.component';
 import { RecuperarComponent } from './login/recuperar/recuperar.component';
 import { TokenComponent } from './login/recuperar/token/token.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { SignosComponent } from './signos/signos.component';
+import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { PerfilComponent } from './perfil/perfil.component';
         NuevoComponent,
         RecuperarComponent,
         TokenComponent,
-        PerfilComponent   
+        PerfilComponent,
+        SignosComponent,
+        SignosEdicionComponent   
     ],
     providers: [],
 })
