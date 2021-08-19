@@ -1,0 +1,57 @@
+<router-outlet></router-outlet>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort style="padding: 3em;">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="idSignos">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.idSignos}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="temperatura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Temperatura</th>
+      <td mat-cell *matCellDef="let element"> {{element.temperatura}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="pulso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pulso</th>
+      <td mat-cell *matCellDef="let element"> {{element.pulso}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ritmo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ritmo</th>
+        <td mat-cell *matCellDef="let element"> {{element.ritmo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="paciente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Paciente</th>
+        <td mat-cell *matCellDef="let element"> {{element.paciente.nombres}} </td>
+      </ng-container>
+    <!-- Symbol Column  element.idPaciente-->
+  <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef > Acciones </th>
+      <td mat-cell *matCellDef="let element"> 
+        <button mat-button color="primary" [routerLink]="['edicion', element.idPaciente]">
+          <mat-icon>ballot</mat-icon>
+      </button>
+      <button mat-button color="primary" (click)="abrirDialog(element.idPaciente)">
+          <mat-icon>delete</mat-icon>
+      </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <button mat-fab color="accent" style="float: right" routerLink="/pages/signos/nuevo" >
+    <mat-icon>add</mat-icon>
+</button>
