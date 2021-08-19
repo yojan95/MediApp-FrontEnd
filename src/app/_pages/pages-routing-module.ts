@@ -17,6 +17,8 @@ import { PacienteEdicionComponent } from './paciente/paciente-edicion/paciente-e
 import { PacienteComponent } from './paciente/paciente.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ReporteComponent } from './reporte/reporte.component';
+import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.component';
+import { SignosComponent } from './signos/signos.component';
 
 export const routes: Routes = [
     { path: 'inicio', component: InicioComponent, canActivate: [GuardService] },
@@ -36,6 +38,12 @@ export const routes: Routes = [
         path: 'especialidad', component: EspecialidadComponent, children: [
             { path: 'nuevo', component: EspecialidadEdicionComponent },
             { path: 'edicion/:id', component: EspecialidadEdicionComponent }
+        ], canActivate: [GuardService]
+    },
+    { 
+        path: 'signos', component: SignosComponent, children: [
+           {path: 'nuevo', component: SignosEdicionComponent },
+           {path: 'edicion/:id',component: SignosEdicionComponent }  
         ], canActivate: [GuardService]
     },
     { path: 'medico', component: MedicoComponent, canActivate: [GuardService] },
