@@ -6,5 +6,5 @@ export class Signos{
     pulso?: string;
     ritmo?: string;
     fecha?: string;
-    paciente: Paciente[];
+    paciente: Paciente;
 }
