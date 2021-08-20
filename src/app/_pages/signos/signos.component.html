@@ -40,10 +40,10 @@
   <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef > Acciones </th>
       <td mat-cell *matCellDef="let element"> 
-        <button mat-button color="primary" [routerLink]="['edicion', element.idPaciente]">
+        <button mat-button color="primary" [routerLink]="['edicion', element.idSignos]">
           <mat-icon>ballot</mat-icon>
       </button>
-      <button mat-button color="primary" (click)="abrirDialog(element.idPaciente)">
+      <button mat-button color="primary" (click)="abrirDialog(element.idSignos)">
           <mat-icon>delete</mat-icon>
       </button>
       </td>
