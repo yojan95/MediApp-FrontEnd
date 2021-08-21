@@ -1,0 +1,65 @@
+<mat-card class="car-box">
+    <mat-card-title>{{title}}</mat-card-title>
+    <form class="example-container" [formGroup]="form" #frmSignos="ngForm" (ngSubmit)="operar()">
+        <div flLayout="column" fxLayoutGap="7px" fxLayoutGap.xs="0px">
+            <div class="container" fxLayout="row" fxLayout.xs="column" style=" justify-content:center">
+
+
+                <div [hidden]="true">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="ID" required formControlName="id">
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="column" style="padding: 1em;">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Temperatura" minlength="3" required formControlName="temperatura">
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="column" style="padding: 1em;">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Pulso" required formControlName="pulso">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="example-full-width" style="padding: 1em;">
+                    <input matInput placeholder="Ritmo" required formControlName="ritmo">
+                </mat-form-field>
+            </div>
+
+            <div class="container" fxLayout="row" fxLayout.xs="column" style=" justify-content:center">
+
+                <mat-form-field class="example-full-width" style="padding: 1em;">
+                    <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" [max]="maxFecha"
+                        formControlName="fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" style="padding: 1em;">
+                    <input type="text" matInput [matAutocomplete]="autoPaciente" placeholder="Paciente"
+                        [formControl]="myControlPaciente" formControlName="idPaciente">
+
+                    <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente">
+                        <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
+                            {{p.nombres}} {{p.apellidos}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btnPrimary" mat-raised-button color="primary" type="submit"
+                    [disabled]="frmSignos.invalid">
+                    <mat-icon>done</mat-icon>
+                    <span>Aceptar</span>
+                </button>
+                <button class="btnWarn" mat-raised-button color="accent" routerLink='/pages/signos' type="button">
+                    <mat-icon>close</mat-icon>
+                    <span>Cancelar</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-card>

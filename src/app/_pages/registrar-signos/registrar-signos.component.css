@@ -1,0 +1,14 @@
+.car-box{
+    width: 600px;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.btnPrimary{
+    margin-right: 5px;
+    width: 250px;
+}
+
+.btnWarn{
+    width: 250px;
+}
