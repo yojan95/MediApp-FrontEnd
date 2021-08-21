@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Paciente } from 'src/app/_model/paciente';
 import { Signos } from 'src/app/_model/signos';
+import { PacienteService } from 'src/app/_service/paciente.service';
 import { SignosService } from 'src/app/_service/signos.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class SignosEdicionComponent implements OnInit {
   id: number = 0;
   edicion: boolean= false;
   title:string;
-  signos = new Signos();
+  maxFecha: Date = new Date();
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +33,7 @@ export class SignosEdicionComponent implements OnInit {
       'temperatura': new FormControl(''),
       'pulso': new FormControl(''),
       'ritmo': new FormControl(''),
-      'fecha': new FormControl(''),
+      'fecha': new FormControl(new Date()),
       'idPaciente': new FormControl('')
     });
 
@@ -46,7 +48,12 @@ export class SignosEdicionComponent implements OnInit {
       }
       this.initForm();
     });
+
   }
+
+  
+
+
 
   initForm(){
     if(this.edicion){
@@ -59,7 +66,8 @@ export class SignosEdicionComponent implements OnInit {
           'pulso': new FormControl(data.pulso),
           'ritmo': new FormControl(data.ritmo),
           'fecha': new FormControl(data.fecha),
-          'idPaciente': new FormControl(data.paciente.nombres)
+          'idPaciente': new FormControl(data.paciente.nombres),
+          'Paciente': new FormControl(data.paciente)
         });
       })
     }
@@ -72,7 +80,7 @@ export class SignosEdicionComponent implements OnInit {
     signos.pulso = this.form.value['pulso'];
     signos.ritmo = this.form.value['ritmo'];
     signos.fecha = this.form.value['fecha'];
-    signos.paciente = this.form.value['idPaciente'];
+    signos.paciente = this.form.value['Paciente'];
 
     if(this.edicion){
       this.signosService.modificar(signos).subscribe(()=>{
@@ -81,16 +89,10 @@ export class SignosEdicionComponent implements OnInit {
           this.signosService.setMensajeCambio('Se modifico');
         })
       });
-    }else{
-      this.signosService.registrar(signos).pipe(switchMap(() =>{
-        return this.signosService.listar();
-      }))
-      .subscribe(data =>{
-        this.signosService.setSignosCambio(data);
-        this.signosService.setMensajeCambio('Se registro');
-      });
     }
     this.router.navigate(['/pages/signos'])
   }
+
+
 
 }
