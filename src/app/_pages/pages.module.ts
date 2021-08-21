@@ -32,6 +32,7 @@ import { TokenComponent } from './login/recuperar/token/token.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { SignosComponent } from './signos/signos.component';
 import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.component';
+import { RegistrarSignosComponent } from './registrar-signos/registrar-signos.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.c
         TokenComponent,
         PerfilComponent,
         SignosComponent,
-        SignosEdicionComponent   
+        SignosEdicionComponent,
+        RegistrarSignosComponent   
     ],
     providers: [],
 })
