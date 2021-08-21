@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { switchMap } from 'rxjs/operators';
 import { Signos } from 'src/app/_model/signos';
@@ -18,10 +19,20 @@ export class SignosComponent implements OnInit {
 
   constructor(
     private signosService: SignosService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
+
+    this.signosService.getSignosCambio().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    })
+
+    this.signosService.getMensajeCambio().subscribe(texto =>{
+      this.snackbar.open(texto, 'AVISO', {duration:2000});
+    });
+
     this.signosService.listar().subscribe(data => {
       console.log(data);
       this.dataSource = new MatTableDataSource(data);
