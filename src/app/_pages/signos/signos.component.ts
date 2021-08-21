@@ -34,15 +34,17 @@ export class SignosComponent implements OnInit {
     });
 
     this.signosService.listar().subscribe(data => {
-      console.log(data);
-      this.dataSource = new MatTableDataSource(data);
+      this.listarTabla(data);
     });
   }
 
   eliminar(id:number){
     this.signosService.eliminar(id).pipe(switchMap(() => {
       return this.signosService.listar();
-    }));
+    }))
+    .subscribe(data => {
+      this.listarTabla(data);
+    }); 
   }
 
   abrirDialog(id:number){
@@ -56,5 +58,8 @@ export class SignosComponent implements OnInit {
     })
    }
   
+   listarTabla(data :any){
+    this.dataSource = new MatTableDataSource(data);
+   }
 
 }
