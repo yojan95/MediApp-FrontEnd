@@ -16,6 +16,7 @@ import { Not403Component } from './not403/not403.component';
 import { PacienteEdicionComponent } from './paciente/paciente-edicion/paciente-edicion.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { RegistrarSignosComponent } from './registrar-signos/registrar-signos.component';
 import { ReporteComponent } from './reporte/reporte.component';
 import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.component';
 import { SignosComponent } from './signos/signos.component';
@@ -42,7 +43,7 @@ export const routes: Routes = [
     },
     { 
         path: 'signos', component: SignosComponent, children: [
-           {path: 'nuevo', component: SignosEdicionComponent },
+           {path: 'nuevo', component: RegistrarSignosComponent },
            {path: 'edicion/:id',component: SignosEdicionComponent }  
         ], canActivate: [GuardService]
     },
