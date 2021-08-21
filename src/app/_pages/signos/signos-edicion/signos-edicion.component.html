@@ -29,15 +29,23 @@
             </div>
 
             <div class="container" fxLayout="row" fxLayout.xs="column" style=" justify-content:center">
+
                 <mat-form-field class="example-full-width" style="padding: 1em;">
-                    <input matInput placeholder="Fecha" required formControlName="fecha">
+                    <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" [max]="maxFecha"
+                        formControlName="fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width" style="padding: 1em;">
-                    <input matInput placeholder="Paciente" required formControlName="idPaciente">
+                    <input matInput placeholder="Paciente" required formControlName="idPaciente" [readonly]="true">
                 </mat-form-field>
+
+                <input matInput placeholder="Paciente" required formControlName="Paciente" [readonly]="true"
+                    style="display: none;">
+
             </div>
-        
+
             <div style="text-align: center;">
                 <button class="btnPrimary" mat-raised-button color="primary" type="submit"
                     [disabled]="frmSignos.invalid">
@@ -51,6 +59,4 @@
             </div>
         </div>
     </form>
- 
-
 </mat-card>
