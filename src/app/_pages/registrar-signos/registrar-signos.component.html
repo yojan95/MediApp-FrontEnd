@@ -39,7 +39,9 @@
 
                 <mat-form-field class="example-full-width" style="padding: 1em;">
                     <input type="text" matInput [matAutocomplete]="autoPaciente" placeholder="Paciente"
-                        [formControl]="myControlPaciente" formControlName="idPaciente">
+                        [formControl]="myControlPaciente" formControlName="idPaciente"  required>
+                        <!--value="{{myControlPaciente.value}}"-->
+                      
 
                     <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente">
                         <mat-option *ngFor="let p of pacientesFiltrados$ | async" [value]="p">
@@ -47,6 +49,8 @@
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
+
+                <button class="btnPrimaryModal" mat-button (click)="openDialog()" type="button">Nuevo Paciente</button>
             </div>
 
             <div style="text-align: center;">
