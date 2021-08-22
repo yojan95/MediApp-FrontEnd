@@ -43,7 +43,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent    
+    LoginComponent 
   ],
   imports: [
     BrowserModule,
