@@ -33,6 +33,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { SignosComponent } from './signos/signos.component';
 import { SignosEdicionComponent } from './signos/signos-edicion/signos-edicion.component';
 import { RegistrarSignosComponent } from './registrar-signos/registrar-signos.component';
+import {PacienteModalComponent} from './registrar-signos/paciente-modal/paciente-modal.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { RegistrarSignosComponent } from './registrar-signos/registrar-signos.co
         PerfilComponent,
         SignosComponent,
         SignosEdicionComponent,
-        RegistrarSignosComponent   
+        RegistrarSignosComponent,
+        PacienteModalComponent
     ],
     providers: [],
 })
