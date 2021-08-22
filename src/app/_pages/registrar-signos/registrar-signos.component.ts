@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { Paciente } from 'src/app/_model/paciente';
 import { Signos } from 'src/app/_model/signos';
 import { PacienteService } from 'src/app/_service/paciente.service';
 import { SignosService } from 'src/app/_service/signos.service';
+import { PacienteModalComponent } from './paciente-modal/paciente-modal.component';
 
 @Component({
   selector: 'app-registrar-signos',
@@ -21,10 +23,12 @@ export class RegistrarSignosComponent implements OnInit {
   myControlPaciente: FormControl = new FormControl();
   pacientesFiltrados$: Observable<Paciente[]>;
   maxFecha: Date = new Date();
+  pacienteCambio:string ="";
   constructor(
     private signosService: SignosService,
     private pacienteService: PacienteService,
-    private router:Router
+    private router:Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -37,12 +41,18 @@ export class RegistrarSignosComponent implements OnInit {
       'idPaciente': this.myControlPaciente
     });
 
+    this.signosService.getPacienteCambio().subscribe(data =>{
+      //this.pacienteCambio = data.nombres;
+     // this.myControlPaciente.setValue(`${data.nombres} ${data.apellidos}`);
+    });
+
     this.listarPacientes();
     this.pacientesFiltrados$ = this.myControlPaciente.valueChanges.pipe(map(val => this.filtrarPacientes(val)));
   }
 
-  filtrarPacientes(val: any) {    
-    if (val != null && val.idPaciente > 0) {
+  filtrarPacientes(val: any) {
+    //   
+    if (val != null && val.idPaciente > 0  ) {
       return this.pacientes.filter(el =>
         el.nombres.toLowerCase().includes(val.nombres.toLowerCase()) || el.apellidos.toLowerCase().includes(val.apellidos.toLowerCase()) || el.dni.includes(val.dni)
       );
@@ -57,9 +67,15 @@ export class RegistrarSignosComponent implements OnInit {
   }
 
   listarPacientes(){
-    this.pacienteService.listar().subscribe(data => {
+    this.pacienteService.listar().subscribe(data =>{
       this.pacientes = data;
     });
+
+    this.pacienteService.getPacienteCambio().subscribe(data =>{
+      this.pacientes = data;
+    })
+      
+    
   }
 
   operar(){
@@ -70,7 +86,7 @@ export class RegistrarSignosComponent implements OnInit {
     signos.ritmo = this.form.value['ritmo'];
     signos.fecha = this.form.value['fecha'];
     signos.paciente = this.form.value['idPaciente'];
-    
+   // signos.paciente = this.pacienteCambio;
     this.signosService.registrar(signos).pipe(switchMap(() =>{
       return this.signosService.listar();
     }))
@@ -79,5 +95,13 @@ export class RegistrarSignosComponent implements OnInit {
       this.signosService.setMensajeCambio('Se registro');
     });
     this.router.navigate(['/pages/signos'])
+    this.pacienteCambio = '';
+  }
+
+  openDialog(){
+    const dialogR = this.dialog.open(PacienteModalComponent,{
+      width: '700px'
+    });
+    
   }
 }
