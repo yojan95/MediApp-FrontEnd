@@ -34,32 +34,25 @@ export class SignosEdicionComponent implements OnInit {
       'pulso': new FormControl(''),
       'ritmo': new FormControl(''),
       'fecha': new FormControl(new Date()),
-      'idPaciente': new FormControl('')
+      'idPaciente': new FormControl(''),
+      'Paciente': new FormControl(null)
     });
 
     this.route.params.subscribe((data: Params ) =>{
       this.id = data['id'];
       this.edicion = data['id'] != null;
-      console.log("identificacion "+this.id);
       if(this.edicion){
         this.title="Modificar Signos";
-      }else{
-        this.title="Registrar Signos"
       }
       this.initForm();
     });
 
   }
 
-  
-
-
-
   initForm(){
     if(this.edicion){
       this.signosService.listarPorId(this.id).subscribe(data =>{
       
-        console.log(data);
         this.form = new FormGroup({
           'id': new FormControl(data.idSignos),
           'temperatura': new FormControl(data.temperatura),
@@ -92,7 +85,5 @@ export class SignosEdicionComponent implements OnInit {
     }
     this.router.navigate(['/pages/signos'])
   }
-
-
 
 }
