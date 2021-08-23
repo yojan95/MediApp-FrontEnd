@@ -86,7 +86,6 @@ export class RegistrarSignosComponent implements OnInit {
     signos.ritmo = this.form.value['ritmo'];
     signos.fecha = this.form.value['fecha'];
     signos.paciente = this.form.value['idPaciente'];
-   // signos.paciente = this.pacienteCambio;
     this.signosService.registrar(signos).pipe(switchMap(() =>{
       return this.signosService.listar();
     }))
