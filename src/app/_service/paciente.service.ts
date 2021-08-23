@@ -42,4 +42,8 @@ export class PacienteService extends GenericService<Paciente>{
     return this.http.get<any>(`${this.url}/pageable?page=${pagina}&size=${tamaño}`);
   }
 
+  buscarDni(dni:any){
+    return this.http.get(`${environment.HOST}/pacientes/dnis/${dni}`)
+  }
+
 }
