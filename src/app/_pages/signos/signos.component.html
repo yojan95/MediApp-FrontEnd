@@ -1,4 +1,9 @@
 <router-outlet></router-outlet>
+<div>
+  <mat-form-field>
+    <input matInput (keyup)="filtarTabla($event)" placeholder="Buscar">
+  </mat-form-field>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort style="padding: 3em;">
 
     <!--- Note that these columns can be defined in any order.
