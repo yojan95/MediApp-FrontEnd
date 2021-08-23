@@ -62,4 +62,8 @@ export class SignosComponent implements OnInit {
     this.dataSource = new MatTableDataSource(data);
    }
 
+   filtarTabla(e:any){
+      this.dataSource.filter = e.target.value.trim().toLowerCase(); 
+   }
+
 }
